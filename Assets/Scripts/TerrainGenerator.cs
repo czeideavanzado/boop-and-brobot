@@ -13,19 +13,19 @@ public class TerrainGenerator : MonoBehaviour {
 
 	private float terrainWidth;
 
-	public GameObject[] terrainArray;
+	// public GameObject[] terrainArray;
 	private int terrainSelector;
 	private float[] terrainWidths;
 
-	//public ObjectPooler objectPooler;
+	public ObjectPooler[] objectPools;
 
 	// Use this for initialization
 	void Start () {
 		// terrainWidth = terrain.GetComponent<BoxCollider2D>().size.x;
-		terrainWidths = new float[terrainArray.Length];
+		terrainWidths = new float[objectPools.Length];
 
-		for(int i = 0; i < terrainArray.Length; i++) {
-			terrainWidths[i] = terrainArray[i].GetComponent<BoxCollider2D>().size.x;
+		for(int i = 0; i < objectPools.Length; i++) {
+			terrainWidths[i] = objectPools[i].pooledObject.GetComponent<BoxCollider2D>().size.x;
 		}
 	}
 	
@@ -34,17 +34,18 @@ public class TerrainGenerator : MonoBehaviour {
 		if(transform.position.x < generationPoint.position.x) {
 			distance = Random.Range (distanceMin, distanceMax);
 			
-			terrainSelector = Random.Range(0, terrainArray.Length);
+			terrainSelector = Random.Range(0, objectPools.Length);
 			
-			transform.position = new Vector3(transform.position.x + terrainWidths[terrainSelector] + distance, transform.position.y, transform.position.z);
+			transform.position = new Vector3(transform.position.x + (terrainWidths[terrainSelector] / 2) + distance, transform.position.y, transform.position.z);
 
-			// Instantiate (terrain, transform.position, transform.rotation);
-			Instantiate (terrainArray[terrainSelector], transform.position, transform.rotation);
-			/* GameObject newTerrain = objectPooler.GetPooledObject();
+			// Instantiate (terrainArray[terrainSelector], transform.position, transform.rotation);
+			GameObject newTerrain = objectPools[terrainSelector].GetPooledObject();
 
 			newTerrain.transform.position = transform.position;
 			newTerrain.transform.rotation = transform.rotation;
-			newTerrain.SetActive(true); */
+			newTerrain.SetActive(true);
+
+			transform.position = new Vector3(transform.position.x + (terrainWidths[terrainSelector] / 2), transform.position.y, transform.position.z);
 		}
 	}
 }
