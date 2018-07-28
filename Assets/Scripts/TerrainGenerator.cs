@@ -13,6 +13,8 @@ public class TerrainGenerator : MonoBehaviour {
 
 	private float platformWidth;
 
+	public ObjectPooler objectPooler;
+
 	// Use this for initialization
 	void Start () {
 		platformWidth = platform.GetComponent<BoxCollider2D>().size.x;
@@ -25,7 +27,12 @@ public class TerrainGenerator : MonoBehaviour {
 			
 			transform.position = new Vector3(transform.position.x + platformWidth + distance, transform.position.y, transform.position.z);
 			
-			Instantiate (platform, transform.position, transform.rotation);
+			//Instantiate (platform, transform.position, transform.rotation);
+			GameObject newTerrain = objectPooler.GetPooledObject();
+
+			newTerrain.transform.position = transform.position;
+			newTerrain.transform.rotation = transform.rotation;
+			newTerrain.SetActive(true);
 		}
 	}
 }
