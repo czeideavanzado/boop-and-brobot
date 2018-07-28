@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour {
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
 		}
 
+		if (Input.GetKeyUp(KeyCode.Space) && !grounded) {
+			rigidbody.velocity = new Vector2(rigidbody.velocity.x, -(jumpForce/5));
+		}
+
 		animator.SetFloat ("Speed", rigidbody.velocity.x);
 		animator.SetBool ("Grounded", grounded);
 	}

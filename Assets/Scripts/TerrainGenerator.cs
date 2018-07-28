@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class TerrainGenerator : MonoBehaviour {
 
-	public GameObject platform;
+	public GameObject terrain;
 	public Transform generationPoint;
 	public float distance;
 
 	public float distanceMin;
 	public float distanceMax;
 
-	private float platformWidth;
+	private float terrainWidth;
 
-	public ObjectPooler objectPooler;
+	public GameObject[] terrainArray;
+	private int terrainSelector;
+	private float[] terrainWidths;
+
+	//public ObjectPooler objectPooler;
 
 	// Use this for initialization
 	void Start () {
-		platformWidth = platform.GetComponent<BoxCollider2D>().size.x;
+		// terrainWidth = terrain.GetComponent<BoxCollider2D>().size.x;
+		terrainWidths = new float[terrainArray.Length];
+
+		for(int i = 0; i < terrainArray.Length; i++) {
+			terrainWidths[i] = terrainArray[i].GetComponent<BoxCollider2D>().size.x;
+		}
 	}
 	
 	// Update is called once per frame
@@ -25,14 +34,17 @@ public class TerrainGenerator : MonoBehaviour {
 		if(transform.position.x < generationPoint.position.x) {
 			distance = Random.Range (distanceMin, distanceMax);
 			
-			transform.position = new Vector3(transform.position.x + platformWidth + distance, transform.position.y, transform.position.z);
+			terrainSelector = Random.Range(0, terrainArray.Length);
 			
-			//Instantiate (platform, transform.position, transform.rotation);
-			GameObject newTerrain = objectPooler.GetPooledObject();
+			transform.position = new Vector3(transform.position.x + terrainWidths[terrainSelector] + distance, transform.position.y, transform.position.z);
+
+			// Instantiate (terrain, transform.position, transform.rotation);
+			Instantiate (terrainArray[terrainSelector], transform.position, transform.rotation);
+			/* GameObject newTerrain = objectPooler.GetPooledObject();
 
 			newTerrain.transform.position = transform.position;
 			newTerrain.transform.rotation = transform.rotation;
-			newTerrain.SetActive(true);
+			newTerrain.SetActive(true); */
 		}
 	}
 }
