@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour {
 	public float jumpForce;
 	public float jumpTime;
 	private float jumpTimeCounter;
-	private bool jumpedFromGround;
+
+	public bool canFly;
 
 	private Rigidbody2D rigidbody;
 
@@ -53,10 +54,6 @@ public class PlayerController : MonoBehaviour {
 
 		grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
 
-		if (grounded) {
-			jumpedFromGround = false;
-		}
-
 		if(transform.position.x > speedMilestoneCount) {
 			speedMilestoneCount += speedIncreaseMilestone;
 			speedIncreaseMilestone *= speedMultiplier;
@@ -81,6 +78,7 @@ public class PlayerController : MonoBehaviour {
 
 		if(Input.GetKeyUp(KeyCode.Space)) {
 			jumpTimeCounter = 0;
+			jumpedFromGround = false;
 		}
 
 		if(grounded) {
