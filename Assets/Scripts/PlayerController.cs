@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody2D rigidbody;
 
 	public bool grounded;
-	public LayerMask whatIsGround;
+	public LayerMask groundLayer;
+
 	public Transform groundChecker;
 	public float groundCheckerRadius;
 
@@ -38,9 +39,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// grounded = Physics2D.IsTouchingLayers(collider, whatIsGround);
+		// grounded = Physics2D.IsTouchingLayers(collider, groundLayer);
 
-		grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, whatIsGround);
+		grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
 
 		if(transform.position.x > speedMilestoneCount) {
 			speedMilestoneCount += speedIncreaseMilestone;
