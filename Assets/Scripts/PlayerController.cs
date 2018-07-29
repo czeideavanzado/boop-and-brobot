@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour {
 	public float jumpForce;
 	public float jumpTime;
 	private float jumpTimeCounter;
+	private bool jumpedFromGround;
 
 	public bool canFly;
+	public bool hasJetPack;
 
 	private Rigidbody2D rigidbody;
 
@@ -40,7 +42,6 @@ public class PlayerController : MonoBehaviour {
 		animator = GetComponent<Animator>();
 
 		moveSpeedStorage = moveSpeed;
-		jumpedFromGround = false;
 		jumpTimeCounter = jumpTime;
 
 		speedIncreaseMilestoneStorage = speedIncreaseMilestone;
@@ -52,7 +53,15 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 		// grounded = Physics2D.IsTouchingLayers(collider, groundLayer);
 
-		grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
+		if (canFly) {
+			grounded = false;
+		} else {
+			grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
+		}
+
+		if(hasJetPack) {
+			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+		}
 
 		if(transform.position.x > speedMilestoneCount) {
 			speedMilestoneCount += speedIncreaseMilestone;
@@ -65,11 +74,9 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetKeyDown(KeyCode.Space) && grounded) {
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
 			jumpedFromGround = true;
+		} else if (Input.GetKey(KeyCode.Space) && canFly) {
+			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
 		}
-
-		// if(Input.GetKeyUp(KeyCode.Space) && !grounded) {
-		// 	rigidbody.velocity = new Vector2(rigidbody.velocity.x, -(jumpForce/5));
-		// }
 
 		if(Input.GetKey(KeyCode.Space) && jumpTimeCounter > 0 && jumpedFromGround) {
 				rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);

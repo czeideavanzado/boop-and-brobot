@@ -25,6 +25,8 @@ public class TerrainGenerator : MonoBehaviour {
 	public float maxHeightChange;
 	private float heightChange;
 
+	public PlayerController playerController;
+
 	// Use this for initialization
 	void Start () {
 		// terrainWidth = terrain.GetComponent<BoxCollider2D>().size.x;
@@ -50,6 +52,12 @@ public class TerrainGenerator : MonoBehaviour {
 				heightChange = maxHeight;
 			} else if (heightChange < minHeight) {
 				heightChange = minHeight;
+			}
+
+			if(playerController.hasJetPack) {
+				distance = 0;
+				heightChange = minHeight;
+				terrainSelector = 0;
 			}
 
 			transform.position = new Vector3(transform.position.x + (terrainWidths[terrainSelector] / 2) + distance, heightChange, transform.position.z);

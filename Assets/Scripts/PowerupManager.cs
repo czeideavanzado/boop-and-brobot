@@ -36,6 +36,7 @@ public class PowerupManager : MonoBehaviour {
 			}
 
 			if(hasJetPack) {
+				playerController.hasJetPack = true;
 				jetpack.SetActive(true);
 			}
 
@@ -44,6 +45,7 @@ public class PowerupManager : MonoBehaviour {
 			// }
 
 			if(canFly) {
+				playerController.canFly = true;
 				wings.SetActive(true);
 			}
 
@@ -51,9 +53,12 @@ public class PowerupManager : MonoBehaviour {
 				isPowerupActive = false;
 
 				shield.SetActive(false);
-				jetpack.SetActive(false);
 				// magnet.SetActive(false);
+				playerController.canFly = false;
 				wings.SetActive(false);
+				
+				playerController.hasJetPack = false;
+				jetpack.SetActive(false);
 			}
 		}
 	}
