@@ -867,7 +867,7 @@ MonoBehaviour:
   terrain: {fileID: 1312692551486754, guid: a7f7f8e182b774251943061b371b7aef, type: 2}
   generationPoint: {fileID: 133855589}
   distance: 5e+13
-  distanceMin: 1
+  distanceMin: 2
   distanceMax: 10
   objectPools:
   - {fileID: 1841125063}
@@ -1582,10 +1582,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1683783880}
   - component: {fileID: 1683783879}
-  - component: {fileID: 1683783878}
   - component: {fileID: 1683783877}
   - component: {fileID: 1683783882}
   - component: {fileID: 1683783881}
+  - component: {fileID: 1683783878}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -1625,7 +1625,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.060335033, y: -0.25662243}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1636,7 +1636,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.23696847, y: 0.11675513}
+  m_Size: {x: 0.57, y: 0.69}
   m_EdgeRadius: 0
 --- !u!212 &1683783879
 SpriteRenderer:
@@ -1690,9 +1690,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1683783876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.77, y: -2.82, z: -0.1}
+  m_LocalPosition: {x: -8.48, y: -2.84, z: -0.1}
   m_LocalScale: {x: 4.427393, y: 4.4273963, z: 4.4273963}
-  m_Children: []
+  m_Children:
+  - {fileID: 1755349971}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1708,12 +1709,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  jumpForce: 10
-  jumpTime: 0.5
+  speedMultiplier: 1.05
+  speedIncreaseMilestone: 50
+  jumpForce: 12
+  jumpTime: 0.25
   grounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  groundChecker: {fileID: 1755349971}
+  groundCheckerRadius: 0.1
 --- !u!95 &1683783882
 Animator:
   serializedVersion: 3
@@ -1732,6 +1737,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1755349970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1755349971}
+  m_Layer: 9
+  m_Name: GroundChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1755349971
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1755349970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.348, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1683783880}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793867172
 GameObject:
   m_ObjectHideFlags: 0
