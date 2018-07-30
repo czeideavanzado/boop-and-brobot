@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour {
 	public bool canFly;
 	public bool hasJetPack;
 
-	private Rigidbody2D rigidbody;
+	public Rigidbody2D rigidbody;
 
 	public bool grounded;
 	public LayerMask groundLayer;
@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
 
 	public GameManager gameManager;
 
+	private Rigidbody2D playerCamera;
+
 	// Use this for initialization
 	void Start () {
 		rigidbody = GetComponent<Rigidbody2D>();
@@ -47,11 +49,14 @@ public class PlayerController : MonoBehaviour {
 		speedIncreaseMilestoneStorage = speedIncreaseMilestone;
 		speedMilestoneCount = speedIncreaseMilestone;
 		speedMilestoneCountStorage = speedMilestoneCount;
+
+		playerCamera = transform.Find("Player Camera").gameObject.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// grounded = Physics2D.IsTouchingLayers(collider, groundLayer);
+		playerCamera.velocity = new Vector2(moveSpeed, playerCamera.velocity.y);
 
 		if (canFly) {
 			grounded = false;
