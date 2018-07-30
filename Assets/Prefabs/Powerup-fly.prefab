@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114629926914858540}
   - component: {fileID: 114864514182975172}
   m_Layer: 0
-  m_Name: powerup-fly
+  m_Name: Powerup-fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
