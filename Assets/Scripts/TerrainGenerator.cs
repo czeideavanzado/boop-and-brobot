@@ -27,6 +27,11 @@ public class TerrainGenerator : MonoBehaviour {
 
 	public PlayerController playerController;
 
+	public float powerupHeight;
+	public ObjectPooler[] powerupPools;
+	private int powerupSelector;
+	public float[] powerupThresholds;
+
 	// Use this for initialization
 	void Start () {
 		// terrainWidth = terrain.GetComponent<BoxCollider2D>().size.x;
@@ -58,6 +63,14 @@ public class TerrainGenerator : MonoBehaviour {
 				distance = 0;
 				heightChange = minHeight;
 				terrainSelector = 0;
+			}
+
+			powerupSelector = Random.Range(0, powerupPools.Length);
+
+			if(Random.Range(0f, 100f) < powerupThresholds[powerupSelector]) {
+				GameObject newPowerup = powerupPools[powerupSelector].GetPooledObject();
+				newPowerup.transform.position = transform.position + new Vector3(distance / 2f, Random.Range(powerupHeight / 2f, powerupHeight), 0f);
+				newPowerup.SetActive(true);
 			}
 
 			transform.position = new Vector3(transform.position.x + (terrainWidths[terrainSelector] / 2) + distance, heightChange, transform.position.z);

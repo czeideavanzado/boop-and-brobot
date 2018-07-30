@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 
 	private TerrainDestroyer[] terrainList;
 
+	public PowerupManager powerupManager;
+
 	// Use this for initialization
 	void Start () {
 		terrainStartPoint = terrainGenerator.position;
@@ -39,5 +41,6 @@ public class GameManager : MonoBehaviour {
 		terrainGenerator.position = terrainStartPoint;
 		playerController.transform.position = playerStartPoint;
 		playerController.gameObject.SetActive(true);
+		powerupManager.DeactivatePowerups();
 	}
 }

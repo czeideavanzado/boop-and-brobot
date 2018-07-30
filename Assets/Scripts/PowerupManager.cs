@@ -72,4 +72,16 @@ public class PowerupManager : MonoBehaviour {
 
 		isPowerupActive = true;
 	}
+
+	public void DeactivatePowerups () {
+		shield.SetActive(false);
+
+		playerController.hasJetPack = false;
+		jetpack.SetActive(false);
+
+		playerController.canFly = false;
+		wings.SetActive(false);
+
+		isPowerupActive = false;
+	}
 }

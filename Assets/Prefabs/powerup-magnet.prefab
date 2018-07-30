@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212152083226694684}
   - component: {fileID: 61423133484540432}
   - component: {fileID: 114094806663028804}
+  - component: {fileID: 114227643947421950}
   m_Layer: 0
   m_Name: powerup-magnet
   m_TagString: Untagged
@@ -83,6 +84,18 @@ MonoBehaviour:
   hasMagnet: 0
   canFly: 1
   powerupLength: 10
+--- !u!114 &114227643947421950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1133940327303030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34cdcc179ffdb4c7fbb9dd39cbaa8937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destructionPoint: {fileID: 0}
 --- !u!212 &212152083226694684
 SpriteRenderer:
   m_ObjectHideFlags: 1
