@@ -32,7 +32,9 @@ public class TerrainGenerator : MonoBehaviour {
 	private int powerupSelector;
 	public float[] powerupThresholds;
 
-	
+	public ObjectPooler[] obstaclePools;
+	public float[] obstacleThresholds;
+	private int obstacleSelector;
 
 	// Use this for initialization
 	void Start () {
@@ -83,6 +85,19 @@ public class TerrainGenerator : MonoBehaviour {
 			newTerrain.transform.position = transform.position;
 			newTerrain.transform.rotation = transform.rotation;
 			newTerrain.SetActive(true);
+
+			obstacleSelector = Random.Range(0, obstacleThresholds.Length);
+
+			if(Random.Range(0f, 100f) < obstacleThresholds[obstacleSelector] && !playerController.hasJetPack) {
+				GameObject newObstacle = obstaclePools[obstacleSelector].GetPooledObject();
+				float obstacleXPosition = Random.Range(-terrainWidths[terrainSelector] / 2f + 1f, terrainWidths[terrainSelector] / 2f - 1f);
+				
+				Vector3 obstaclePosition = new Vector3(obstacleXPosition, 1.5f, 0f);
+
+				newObstacle.transform.position = transform.position + obstaclePosition;
+				newObstacle.transform.rotation = transform.rotation;
+				newObstacle.SetActive(true);
+			}
 
 			transform.position = new Vector3(transform.position.x + (terrainWidths[terrainSelector] / 2), transform.position.y, transform.position.z);
 		}
