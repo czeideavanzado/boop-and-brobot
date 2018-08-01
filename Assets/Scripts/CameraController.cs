@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
 	public PlayerController playerController;
-	private GameObject playerCamera;
+	private Rigidbody2D playerCamera;
 
 	private Vector3 playerPosition;
 	private float distance;
@@ -14,13 +14,14 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 		playerController = FindObjectOfType<PlayerController>();
 		// playerPosition = playerController.transform.position;
-		playerCamera = GameObject.Find("Player Camera");
+		playerCamera = GameObject.Find("Player Camera").GetComponent<Rigidbody2D>();
 		playerPosition = playerCamera.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// distance = playerController.transform.position.x - playerPosition.x;
+		playerCamera.velocity = new Vector2(playerController.moveSpeed, playerCamera.velocity.y);
 		distance = playerCamera.transform.position.x - playerPosition.x;
 
 		transform.position = new Vector3(transform.position.x + distance, transform.position.y, transform.position.z);

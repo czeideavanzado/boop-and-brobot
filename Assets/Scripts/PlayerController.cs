@@ -35,8 +35,6 @@ public class PlayerController : MonoBehaviour {
 
 	public GameManager gameManager;
 
-	public Rigidbody2D playerCamera;
-
 	// Use this for initialization
 	void Start () {
 		rigidbody = GetComponent<Rigidbody2D>();
@@ -54,7 +52,6 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// grounded = Physics2D.IsTouchingLayers(collider, groundLayer);
-		playerCamera.velocity = new Vector2(moveSpeed, playerCamera.velocity.y);
 
 		if (canFly) {
 			grounded = false;
