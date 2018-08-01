@@ -1622,7 +1622,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 913888519}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.85, y: -8.21, z: 0}
+  m_LocalPosition: {x: 19.75, y: -8.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -1978,11 +1978,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343107189}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.22586656, y: 0.22586639, z: 0.22586639}
+  m_LocalPosition: {x: -8.48, y: -2.84, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1683783880}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1369328779
 GameObject:
@@ -2388,7 +2388,6 @@ Transform:
   - {fileID: 1454064110}
   - {fileID: 632922607}
   - {fileID: 1636114995}
-  - {fileID: 1343107191}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2418,6 +2417,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1755349971}
   groundCheckerRadius: 0.1
   gameManager: {fileID: 149337431}
+  playerCamera: {fileID: 1343107190}
 --- !u!95 &1683783882
 Animator:
   serializedVersion: 3

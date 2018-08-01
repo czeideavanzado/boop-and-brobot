@@ -32,6 +32,8 @@ public class TerrainGenerator : MonoBehaviour {
 	private int powerupSelector;
 	public float[] powerupThresholds;
 
+	
+
 	// Use this for initialization
 	void Start () {
 		// terrainWidth = terrain.GetComponent<BoxCollider2D>().size.x;

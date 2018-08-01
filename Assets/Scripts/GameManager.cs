@@ -14,10 +14,14 @@ public class GameManager : MonoBehaviour {
 
 	public PowerupManager powerupManager;
 
+	private GameObject playerCamera;
+
 	// Use this for initialization
 	void Start () {
 		terrainStartPoint = terrainGenerator.position;
 		playerStartPoint = playerController.transform.position;
+
+		playerCamera = GameObject.Find("Player Camera");
 	}
 	
 	// Update is called once per frame
@@ -31,6 +35,7 @@ public class GameManager : MonoBehaviour {
 
 	public IEnumerator RestartGameCo () {
 		playerController.gameObject.SetActive(false);
+		playerCamera.SetActive(false);
 		yield return new WaitForSeconds(0.5f);
 
 		terrainList = FindObjectsOfType<TerrainDestroyer>();
@@ -40,7 +45,12 @@ public class GameManager : MonoBehaviour {
 
 		terrainGenerator.position = terrainStartPoint;
 		playerController.transform.position = playerStartPoint;
+		playerCamera.transform.position = playerStartPoint;
+
+		yield return new WaitForSeconds(0.5f);
+		playerCamera.SetActive(true);
 		playerController.gameObject.SetActive(true);
+		
 		powerupManager.DeactivatePowerups();
 	}
 }

@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 
 	public GameManager gameManager;
 
-	private Rigidbody2D playerCamera;
+	public Rigidbody2D playerCamera;
 
 	// Use this for initialization
 	void Start () {
@@ -49,8 +49,6 @@ public class PlayerController : MonoBehaviour {
 		speedIncreaseMilestoneStorage = speedIncreaseMilestone;
 		speedMilestoneCount = speedIncreaseMilestone;
 		speedMilestoneCountStorage = speedMilestoneCount;
-
-		playerCamera = transform.Find("Player Camera").gameObject.GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame

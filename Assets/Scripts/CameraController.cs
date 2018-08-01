@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour {
 	void Start () {
 		playerController = FindObjectOfType<PlayerController>();
 		// playerPosition = playerController.transform.position;
-		playerCamera = playerController.transform.Find("Player Camera").gameObject;
+		playerCamera = GameObject.Find("Player Camera");
 		playerPosition = playerCamera.transform.position;
 	}
 	
