@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 
 	private TerrainDestroyer[] terrainList;
 
+	private ScoreManager scoreManager;
+
 	public PowerupManager powerupManager;
 
 	private GameObject playerCamera;
@@ -22,6 +24,8 @@ public class GameManager : MonoBehaviour {
 		playerStartPoint = playerController.transform.position;
 
 		playerCamera = GameObject.Find("Player Camera");
+
+		scoreManager = FindObjectOfType<ScoreManager>();
 	}
 	
 	// Update is called once per frame
@@ -34,6 +38,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public IEnumerator RestartGameCo () {
+		scoreManager.scoreIncreasing = false;
 		playerController.gameObject.SetActive(false);
 		playerCamera.SetActive(false);
 		yield return new WaitForSeconds(0.5f);
@@ -46,6 +51,9 @@ public class GameManager : MonoBehaviour {
 		terrainGenerator.position = terrainStartPoint;
 		playerController.transform.position = playerStartPoint;
 		playerCamera.transform.position = playerStartPoint;
+
+		scoreManager.distanceScore = 0; //Reset score to 0
+		scoreManager.scoreIncreasing = true;
 
 		yield return new WaitForSeconds(0.5f);
 		playerCamera.SetActive(true);
