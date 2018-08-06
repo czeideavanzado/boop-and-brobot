@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviour {
 
 	public PowerupManager powerupManager;
 
+	public DeathScreen deathScreen;
+
 	private GameObject playerCamera;
+
 
 	// Use this for initialization
 	void Start () {
@@ -34,14 +37,17 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void RestartGame () {
-		StartCoroutine("RestartGameCo");
-	}
-
-	public IEnumerator RestartGameCo () {
 		scoreManager.scoreIncreasing = false;
 		playerController.gameObject.SetActive(false);
 		playerCamera.SetActive(false);
 
+		deathScreen.gameObject.SetActive(true);
+	}
+
+	public void Reset() {
+
+	    deathScreen.gameObject.SetActive(false);
+		
 		/*
 		Update total amount of coins the player has by adding the amount of coins collected in the game.
 		Can be used for future features like Shop etc.
@@ -51,7 +57,7 @@ public class GameManager : MonoBehaviour {
 		else
 			PlayerPrefs.SetInt("Coins", scoreManager.coinsCollected);
 
-		yield return new WaitForSeconds(0.5f);
+		//yield return new WaitForSeconds(0.5f);
 
 		terrainList = FindObjectsOfType<TerrainDestroyer>();
 		for (int i = 0; i < terrainList.Length; i++) {
@@ -66,10 +72,10 @@ public class GameManager : MonoBehaviour {
 		scoreManager.coinsCollected = 0; //Reset no. of coins collected to 0
 		scoreManager.scoreIncreasing = true;
 
-		yield return new WaitForSeconds(0.5f);
 		playerCamera.SetActive(true);
-		playerController.gameObject.SetActive(true);
-		
-		powerupManager.DeactivatePowerups();
+        playerController.gameObject.SetActive(true);
+
+        powerupManager.DeactivatePowerups();
+
 	}
 }
