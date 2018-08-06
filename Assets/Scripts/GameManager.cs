@@ -41,6 +41,16 @@ public class GameManager : MonoBehaviour {
 		scoreManager.scoreIncreasing = false;
 		playerController.gameObject.SetActive(false);
 		playerCamera.SetActive(false);
+
+		/*
+		Update total amount of coins the player has by adding the amount of coins collected in the game.
+		Can be used for future features like Shop etc.
+		*/
+		if(PlayerPrefs.HasKey("Coins"))
+			PlayerPrefs.SetInt("Coins",PlayerPrefs.GetInt("Coins")+scoreManager.coinsCollected);
+		else
+			PlayerPrefs.SetInt("Coins", scoreManager.coinsCollected);
+
 		yield return new WaitForSeconds(0.5f);
 
 		terrainList = FindObjectsOfType<TerrainDestroyer>();
@@ -53,6 +63,7 @@ public class GameManager : MonoBehaviour {
 		playerCamera.transform.position = playerStartPoint;
 
 		scoreManager.distanceScore = 0; //Reset score to 0
+		scoreManager.coinsCollected = 0; //Reset no. of coins collected to 0
 		scoreManager.scoreIncreasing = true;
 
 		yield return new WaitForSeconds(0.5f);

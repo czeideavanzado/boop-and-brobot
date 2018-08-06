@@ -7,10 +7,13 @@ public class ScoreManager : MonoBehaviour {
 
 	public Text distanceScoreText;
 	public Text distanceHighScoreText;
+	public Text coinsCollectedText;
 
 	public float distanceScore;
 
 	public float distanceHighScore;
+
+	public int coinsCollected;
 
 	
 	public float distancePerSecond; //The amount of distance gained per second while the player is alive.
@@ -21,6 +24,7 @@ public class ScoreManager : MonoBehaviour {
 	void Start () {
 		distanceScore = 0;
 		distanceHighScore = 0;
+		coinsCollected = 0;
 		scoreIncreasing = true;
 
 		//If a highscore was saved before.
@@ -50,15 +54,18 @@ public class ScoreManager : MonoBehaviour {
 			//Save the highscore
 			PlayerPrefs.SetFloat("DistanceHighScore", distanceHighScore);
 		}
-			
-		
-			
-		
 
 		//Update the distance score text
 		distanceScoreText.text = Mathf.RoundToInt(distanceScore) + "m";
 
 		//Update distance highscore text
 		distanceHighScoreText.text = Mathf.RoundToInt(distanceHighScore) + "m";
+
+		coinsCollectedText.text = coinsCollected+"";
+	}
+
+	public void addCoin(int amount)
+	{
+		coinsCollected+=amount;
 	}
 }
