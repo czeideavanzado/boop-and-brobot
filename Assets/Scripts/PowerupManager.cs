@@ -84,4 +84,15 @@ public class PowerupManager : MonoBehaviour {
 
 		isPowerupActive = false;
 	}
+
+	public bool GetHasShield()
+	{
+		return this.hasShield;
+	}
+
+	public void SetHasShield(bool hasShield)
+	{
+		this.hasShield = hasShield;
+		shield.SetActive(hasShield);
+	}
 }

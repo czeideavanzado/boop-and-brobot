@@ -102,11 +102,25 @@ public class PlayerController : MonoBehaviour {
 
 	void OnCollisionEnter2D (Collision2D other) {
 		if(other.gameObject.tag == "Death Box") {
-			deathSound.Play();
-			gameManager.RestartGame();
-			moveSpeed = moveSpeedStorage;
-			speedIncreaseMilestone = speedIncreaseMilestoneStorage;
-			speedMilestoneCount = speedMilestoneCountStorage;
+			Die();
 		}
+		else if (other.gameObject.tag == "Spikes")
+		{
+			if(gameManager.powerupManager.GetHasShield() == true)
+			{
+				gameManager.powerupManager.SetHasShield(false);
+				other.collider.enabled = false;
+			}
+			else Die();
+		}
+	}
+
+	public void Die()
+	{
+		deathSound.Play();
+		gameManager.RestartGame();
+		moveSpeed = moveSpeedStorage;
+		speedIncreaseMilestone = speedIncreaseMilestoneStorage;
+		speedMilestoneCount = speedMilestoneCountStorage;
 	}
 }
