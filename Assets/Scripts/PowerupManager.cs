@@ -52,7 +52,8 @@ public class PowerupManager : MonoBehaviour {
 			if(powerupTimer <= 0) {
 				isPowerupActive = false;
 
-				shield.SetActive(false);
+				//shield.SetActive(false);
+				SetHasShield(false);
 				// magnet.SetActive(false);
 				playerController.canFly = false;
 				wings.SetActive(false);

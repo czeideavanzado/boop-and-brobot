@@ -107,10 +107,7 @@ public class PlayerController : MonoBehaviour {
 		else if (other.gameObject.tag == "Spikes")
 		{
 			if(gameManager.powerupManager.GetHasShield() == true)
-			{
-				gameManager.powerupManager.SetHasShield(false);
 				other.collider.enabled = false;
-			}
 			else Die();
 		}
 	}
