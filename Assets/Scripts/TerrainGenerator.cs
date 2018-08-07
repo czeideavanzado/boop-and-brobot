@@ -36,6 +36,10 @@ public class TerrainGenerator : MonoBehaviour {
 	public float[] obstacleThresholds;
 	private int obstacleSelector;
 
+	private CoinGenerator coinGenerator;
+	public float randomCoinThreshold;
+	public float coinHeight;
+
 	// Use this for initialization
 	void Start () {
 		// terrainWidth = terrain.GetComponent<BoxCollider2D>().size.x;
@@ -47,6 +51,9 @@ public class TerrainGenerator : MonoBehaviour {
 
 		minHeight = transform.position.y;
 		maxHeight = maxHeightPoint.position.y;
+
+		coinGenerator = FindObjectOfType<CoinGenerator>();
+		
 	}
 	
 	// Update is called once per frame
@@ -86,6 +93,9 @@ public class TerrainGenerator : MonoBehaviour {
 			newTerrain.transform.rotation = transform.rotation;
 			newTerrain.SetActive(true);
 
+			if(Random.Range(0f,100f) < randomCoinThreshold)
+				coinGenerator.SpawnCoins(new Vector3(transform.position.x, transform.position.y+coinHeight, transform.position.z));
+
 			obstacleSelector = Random.Range(0, obstacleThresholds.Length);
 
 			if(Random.Range(0f, 100f) < obstacleThresholds[obstacleSelector] && !playerController.hasJetPack) {
@@ -98,6 +108,8 @@ public class TerrainGenerator : MonoBehaviour {
 				newObstacle.transform.rotation = transform.rotation;
 				newObstacle.SetActive(true);
 			}
+
+			
 
 			transform.position = new Vector3(transform.position.x + (terrainWidths[terrainSelector] / 2), transform.position.y, transform.position.z);
 		}
