@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Die()
 	{
+		gameManager.backgroundMusic.Stop();
 		deathSound.Play();
 		gameManager.RestartGame();
 		moveSpeed = moveSpeedStorage;
