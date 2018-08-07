@@ -24,9 +24,12 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		terrainStartPoint = terrainGenerator.position;
-		playerStartPoint = playerController.transform.position;
+		//playerStartPoint = playerController.transform.position;
+		playerStartPoint = Camera.main.ViewportToWorldPoint(new Vector3(0.25f, 0.25f, 10f));
+		playerController.transform.position = playerStartPoint;
 
 		playerCamera = GameObject.Find("Player Camera");
+		playerCamera.transform.position = playerStartPoint;
 
 		scoreManager = FindObjectOfType<ScoreManager>();
 	}
