@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 578b7e3922aff74439f0f1c59c48aab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playGameLevel: Gameplay
+  playGameLevel: Character Select
 --- !u!1 &1023367472
 GameObject:
   m_ObjectHideFlags: 0
