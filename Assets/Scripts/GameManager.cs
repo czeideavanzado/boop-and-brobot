@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour {
 
 	private GameObject playerCamera;
 
+	public AudioSource backgroundMusic;
+
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour {
 		playerCamera.transform.position = playerStartPoint;
 
 		scoreManager = FindObjectOfType<ScoreManager>();
+
+		backgroundMusic.Play();
 	}
 	
 	// Update is called once per frame
@@ -76,9 +80,11 @@ public class GameManager : MonoBehaviour {
 		scoreManager.scoreIncreasing = true;
 
 		playerCamera.SetActive(true);
-        playerController.gameObject.SetActive(true);
+    playerController.gameObject.SetActive(true);
 
-        powerupManager.DeactivatePowerups();
+    powerupManager.DeactivatePowerups();
+
+		backgroundMusic.Play();
 
 	}
 }
