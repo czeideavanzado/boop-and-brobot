@@ -9,14 +9,43 @@ public class PickupCoin : MonoBehaviour {
 	private AudioSource coinSound;
 
 	private ScoreManager scoreManager;
+
+	private bool moveToMagnet;
+
+	private PowerupManager powerupManager;
+	private GameObject player;
+
+	private Vector2 playerDirection;
+
+	private float timeStamp;
+
+	private Rigidbody2D rb;
+
+	public float moveSpeed;
 	
 	// Use this for initialization
 	void Start () {
 		scoreManager = FindObjectOfType<ScoreManager>();
+		powerupManager = FindObjectOfType<PowerupManager>();
 
 		//Get audio source called CoinSound in the Hierarchy
 		coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>(); 
+
+		rb = GetComponent<Rigidbody2D>();
+
+		moveToMagnet = false;
+
 		
+		
+	}
+
+	void Update()
+	{
+		if(moveToMagnet)
+		{
+			playerDirection = -(transform.position - player.transform.position).normalized;
+			rb.velocity = new Vector2(playerDirection.x, playerDirection.y) * moveSpeed * (Time.time/timeStamp);
+		}
 	}
 	
 
@@ -26,6 +55,7 @@ public class PickupCoin : MonoBehaviour {
 		{
 			scoreManager.addCoin(amountToGive);
 			gameObject.SetActive(false);
+			moveToMagnet = false;
 
 			if(coinSound.isPlaying)
 			{
@@ -37,6 +67,12 @@ public class PickupCoin : MonoBehaviour {
 				coinSound.Play();
 			}
 				
+		}
+		if(other.gameObject.name == "Magnet" && powerupManager.GetHasMagnet())
+		{
+			timeStamp = Time.time;
+			player = GameObject.FindGameObjectWithTag("Player");
+			moveToMagnet = true;
 		}
 	}
 }

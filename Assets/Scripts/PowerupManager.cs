@@ -22,7 +22,7 @@ public class PowerupManager : MonoBehaviour {
 	void Start () {
 		shield = playerController.transform.Find("Shield").gameObject; 
 		jetpack = playerController.transform.Find("Jetpack").gameObject;
-		// magnet = playerController.transform.Find("Magnet").gameObject;
+		magnet = playerController.transform.Find("Magnet").gameObject;
 		wings = playerController.transform.Find("Wings").gameObject;
 	}
 	
@@ -40,9 +40,9 @@ public class PowerupManager : MonoBehaviour {
 				jetpack.SetActive(true);
 			}
 
-			// if(hasMagnet) {
-			// 	magnet.SetActive(true);
-			// }
+			if(hasMagnet) {
+				magnet.SetActive(true);
+			}
 
 			if(canFly) {
 				playerController.canFly = true;
@@ -52,9 +52,8 @@ public class PowerupManager : MonoBehaviour {
 			if(powerupTimer <= 0) {
 				isPowerupActive = false;
 
-				//shield.SetActive(false);
 				SetHasShield(false);
-				// magnet.SetActive(false);
+				SetHasMagnet(false);
 				playerController.canFly = false;
 				wings.SetActive(false);
 				
@@ -75,7 +74,9 @@ public class PowerupManager : MonoBehaviour {
 	}
 
 	public void DeactivatePowerups () {
-		shield.SetActive(false);
+		SetHasShield(false);
+
+		SetHasMagnet(false);
 
 		playerController.hasJetPack = false;
 		jetpack.SetActive(false);
@@ -91,9 +92,20 @@ public class PowerupManager : MonoBehaviour {
 		return this.hasShield;
 	}
 
+	public bool GetHasMagnet()
+	{
+		return this.hasMagnet;
+	}
+
 	public void SetHasShield(bool hasShield)
 	{
 		this.hasShield = hasShield;
 		shield.SetActive(hasShield);
+	}
+
+	public void SetHasMagnet(bool hasMagnet)
+	{
+		this.hasMagnet = hasMagnet;
+		magnet.SetActive(hasMagnet);
 	}
 }
