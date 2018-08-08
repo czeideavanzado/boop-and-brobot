@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathScreen : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class DeathScreen : MonoBehaviour {
 
 	public void quitToMainMenu() {
 
-		Application.LoadLevel(mainMenuLevel);
+		SceneManager.LoadScene(mainMenuLevel);
 
 
 	}

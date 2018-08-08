@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\PowerupManager.cs" />
      <Compile Include="Assets\Scripts\Powerups.cs" />
      <Compile Include="Assets\Scripts\ScoreManager.cs" />
+     <Compile Include="Assets\Scripts\ShowUI.cs" />
      <Compile Include="Assets\Scripts\TerrainDestroyer.cs" />
      <Compile Include="Assets\Scripts\TerrainGenerator.cs" />
  <Reference Include="UnityEditor.StandardEvents">
