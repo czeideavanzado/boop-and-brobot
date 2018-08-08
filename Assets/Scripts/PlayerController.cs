@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
 
 	public Rigidbody2D rigidbody;
 
+	private SpriteRenderer sprite;
+
 	public bool grounded;
 	public LayerMask groundLayer;
 
@@ -50,6 +52,18 @@ public class PlayerController : MonoBehaviour {
 		speedIncreaseMilestoneStorage = speedIncreaseMilestone;
 		speedMilestoneCount = speedIncreaseMilestone;
 		speedMilestoneCountStorage = speedMilestoneCount;
+
+		if(PlayerPrefs.HasKey("CharacterSelected"))
+		{
+			if(PlayerPrefs.GetString("CharacterSelected") == "Boop")
+				animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC_Boop");
+			else 
+				animator.runtimeAnimatorController = Resources.Load<AnimatorOverrideController>("AOC_Brobot");
+		}
+		
+
+		deathSound = GameObject.Find("DeathSound").GetComponent<AudioSource>();
+		jumpSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
