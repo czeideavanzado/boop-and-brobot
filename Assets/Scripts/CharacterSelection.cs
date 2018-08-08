@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelection : MonoBehaviour {
 
@@ -15,13 +16,13 @@ public class CharacterSelection : MonoBehaviour {
 	// }
 	
 	public string playGameLevel;
-	public string mainMenuLevel;
 
 	public void PlayGame() {
-		Application.LoadLevel(playGameLevel);
+		SceneManager.LoadScene(playGameLevel);
 	}
 
-	public void MainMenu() {
-		Application.LoadLevel(mainMenuLevel);
+	public void SelectCharacter(string characterName)
+	{
+		PlayerPrefs.SetString("CharacterSelected", characterName);
 	}
 }
