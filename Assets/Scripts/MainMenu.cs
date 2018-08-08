@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour {
 
-	public string playGameLevel;
+	public string nextLevel;
 
-	public void PlayGame() {
-		Application.LoadLevel(playGameLevel);
-	}
-
-	public void QuitGame() {
-		Application.Quit();
+	void Update() {
+		if(Input.GetKeyDown("space")) {
+			Application.LoadLevel(nextLevel);
+		}
 	}
 }
