@@ -18,6 +18,8 @@ public class PowerupManager : MonoBehaviour {
 	private GameObject magnet;
 	private GameObject wings;
 
+	public AudioSource powerUpSound;
+
 	// Use this for initialization
 	void Start () {
 		shield = playerController.transform.Find("Shield").gameObject; 
@@ -71,6 +73,7 @@ public class PowerupManager : MonoBehaviour {
 		powerupTimer = time;
 
 		isPowerupActive = true;
+		powerUpSound.Play();
 	}
 
 	public void DeactivatePowerups () {
