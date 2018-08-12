@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerupManager : MonoBehaviour {
 
@@ -18,6 +19,8 @@ public class PowerupManager : MonoBehaviour {
 	private GameObject magnet;
 	private GameObject wings;
 
+	public Text powerUpTimerText;
+
 	// Use this for initialization
 	void Start () {
 		shield = playerController.transform.Find("Shield").gameObject; 
@@ -29,7 +32,9 @@ public class PowerupManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(isPowerupActive) {
+			powerUpTimerText.text = "Powerups: " + Mathf.RoundToInt(powerupTimer) + "s";
 			powerupTimer -= Time.deltaTime;
+			
 
 			if(hasShield) {
 				shield.SetActive(true);
@@ -51,6 +56,7 @@ public class PowerupManager : MonoBehaviour {
 
 			if(powerupTimer <= 0) {
 				isPowerupActive = false;
+				powerUpTimerText.text = "";
 
 				SetHasShield(false);
 				SetHasMagnet(false);
@@ -71,6 +77,7 @@ public class PowerupManager : MonoBehaviour {
 		powerupTimer = time;
 
 		isPowerupActive = true;
+		
 	}
 
 	public void DeactivatePowerups () {
@@ -85,6 +92,7 @@ public class PowerupManager : MonoBehaviour {
 		wings.SetActive(false);
 
 		isPowerupActive = false;
+		powerUpTimerText.text = "";
 	}
 
 	public bool GetHasShield()
