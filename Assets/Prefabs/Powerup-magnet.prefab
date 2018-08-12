@@ -83,7 +83,7 @@ MonoBehaviour:
   hasJetPack: 0
   hasMagnet: 1
   canFly: 0
-  powerupLength: 10
+  powerupLength: 15
 --- !u!114 &114227643947421950
 MonoBehaviour:
   m_ObjectHideFlags: 1

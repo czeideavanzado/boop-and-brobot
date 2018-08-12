@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         } else {
             playedJetPackSound = false;
+            jetPackSound.Stop();
         }
 
         /* 
