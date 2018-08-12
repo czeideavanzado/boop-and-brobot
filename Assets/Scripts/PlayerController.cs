@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour {
     public bool canFly;
     public bool hasJetPack;
     public bool playedJetPackSound;
-    public bool playedShieldSound;
 
     public Rigidbody2D rigidbody;
 
@@ -43,7 +42,6 @@ public class PlayerController : MonoBehaviour {
     public AudioSource deathSound;
     public AudioSource flySound;
     public AudioSource jetPackSound;
-    public AudioSource shieldSound;
 
     // Use this for initialization
     void Start() {
@@ -69,9 +67,9 @@ public class PlayerController : MonoBehaviour {
 
         deathSound = GameObject.Find("DeathSound").GetComponent<AudioSource>();
         jumpSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
-        flySound = GameObject.Find("FlySound").GetComponent<AudioSource>();
-        jetPackSound = GameObject.Find("JetPackSound").GetComponent<AudioSource>();
-        shieldSound = GameObject.Find("ShieldSound").GetComponent<AudioSource>();
+        //flySound = GameObject.Find("FlySound").GetComponent<AudioSource>();
+        //jetPackSound = GameObject.Find("JetPackSound").GetComponent<AudioSource>();
+        //shieldSound = GameObject.Find("ShieldSound").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -94,6 +92,7 @@ public class PlayerController : MonoBehaviour {
             playedJetPackSound = false;
         }
 
+        /* 
         if (gameManager.powerupManager.GetHasShield()) {
             if(!playedShieldSound || !shieldSound.isPlaying)
             {
@@ -103,6 +102,7 @@ public class PlayerController : MonoBehaviour {
         } else {
             playedShieldSound = false;
         }
+        */
 
         if (transform.position.x > speedMilestoneCount) {
 		    speedMilestoneCount += speedIncreaseMilestone;
@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Die()
 	{
-        shieldSound.Stop();
+        //shieldSound.Stop();
 		gameManager.backgroundMusic.Stop();
 		deathSound.Play();
 		gameManager.RestartGame();
