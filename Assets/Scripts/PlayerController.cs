@@ -4,86 +4,110 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	public float moveSpeed;
-	private float moveSpeedStorage;
+    public float moveSpeed;
+    private float moveSpeedStorage;
 
-	public float speedMultiplier;
-	public float speedIncreaseMilestone;
-	private float speedIncreaseMilestoneStorage;
-	private float speedMilestoneCount;
-	private float speedMilestoneCountStorage;
+    public float speedMultiplier;
+    public float speedIncreaseMilestone;
+    private float speedIncreaseMilestoneStorage;
+    private float speedMilestoneCount;
+    private float speedMilestoneCountStorage;
 
-	public float jumpForce;
-	public float jumpTime;
-	private float jumpTimeCounter;
-	private bool jumpedFromGround;
+    public float jumpForce;
+    public float jumpTime;
+    private float jumpTimeCounter;
+    private bool jumpedFromGround;
 
-	public bool canFly;
-	public bool hasJetPack;
+    public bool canFly;
+    public bool hasJetPack;
+    public bool playedJetPackSound;
+    public bool playedShieldSound;
 
-	public Rigidbody2D rigidbody;
+    public Rigidbody2D rigidbody;
 
-	private SpriteRenderer sprite;
+    private SpriteRenderer sprite;
 
-	public bool grounded;
-	public LayerMask groundLayer;
+    public bool grounded;
+    public LayerMask groundLayer;
 
-	public Transform groundChecker;
-	public float groundCheckerRadius;
+    public Transform groundChecker;
+    public float groundCheckerRadius;
 
-	// private Collider2D collider;
+    // private Collider2D collider;
 
-	private Animator animator;
+    private Animator animator;
 
-	public GameManager gameManager;
+    public GameManager gameManager;
 
-	public AudioSource jumpSound;
-	public AudioSource deathSound;
+    public AudioSource jumpSound;
+    public AudioSource deathSound;
+    public AudioSource flySound;
+    public AudioSource jetPackSound;
+    public AudioSource shieldSound;
 
-	// Use this for initialization
-	void Start () {
-		rigidbody = GetComponent<Rigidbody2D>();
-		// collider = GetComponent<Collider2D>();
-		animator = GetComponent<Animator>();
+    // Use this for initialization
+    void Start() {
+        rigidbody = GetComponent<Rigidbody2D>();
+        // collider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
 
-		moveSpeedStorage = moveSpeed;
-		jumpTimeCounter = jumpTime;
+        moveSpeedStorage = moveSpeed;
+        jumpTimeCounter = jumpTime;
 
-		speedIncreaseMilestoneStorage = speedIncreaseMilestone;
-		speedMilestoneCount = speedIncreaseMilestone;
-		speedMilestoneCountStorage = speedMilestoneCount;
+        speedIncreaseMilestoneStorage = speedIncreaseMilestone;
+        speedMilestoneCount = speedIncreaseMilestone;
+        speedMilestoneCountStorage = speedMilestoneCount;
 
-		if(PlayerPrefs.HasKey("CharacterSelected"))
-		{
-			if(PlayerPrefs.GetString("CharacterSelected") == "Boop")
-				animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC_Boop");
-			else 
-				animator.runtimeAnimatorController = Resources.Load<AnimatorOverrideController>("AOC_Brobot");
-		}
-		
+        if (PlayerPrefs.HasKey("CharacterSelected"))
+        {
+            if (PlayerPrefs.GetString("CharacterSelected") == "Boop")
+                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AC_Boop");
+            else
+                animator.runtimeAnimatorController = Resources.Load<AnimatorOverrideController>("AOC_Brobot");
+        }
 
-		deathSound = GameObject.Find("DeathSound").GetComponent<AudioSource>();
-		jumpSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		// grounded = Physics2D.IsTouchingLayers(collider, groundLayer);
 
-		if (canFly) {
-			grounded = false;
-		} else {
-			grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
-		}
+        deathSound = GameObject.Find("DeathSound").GetComponent<AudioSource>();
+        jumpSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
+        flySound = GameObject.Find("FlySound").GetComponent<AudioSource>();
+        jetPackSound = GameObject.Find("JetPackSound").GetComponent<AudioSource>();
+        shieldSound = GameObject.Find("ShieldSound").GetComponent<AudioSource>();
+    }
 
-		if(hasJetPack) {
-			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
-		}
+    // Update is called once per frame
+    void Update() {
+        // grounded = Physics2D.IsTouchingLayers(collider, groundLayer);
 
-		if(transform.position.x > speedMilestoneCount) {
-			speedMilestoneCount += speedIncreaseMilestone;
-			speedIncreaseMilestone *= speedMultiplier;
-			moveSpeed *= speedMultiplier;
+        if (canFly) {
+            grounded = false;
+        } else {
+            grounded = Physics2D.OverlapCircle(groundChecker.position, groundCheckerRadius, groundLayer);
+        }
+
+        if (hasJetPack) {
+            if (!playedJetPackSound) {
+                jetPackSound.Play();
+                playedJetPackSound = true;
+            }
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+        } else {
+            playedJetPackSound = false;
+        }
+
+        if (gameManager.powerupManager.GetHasShield()) {
+            if(!playedShieldSound || !shieldSound.isPlaying)
+            {
+                shieldSound.Play();
+                playedShieldSound = true;
+            }
+        } else {
+            playedShieldSound = false;
+        }
+
+        if (transform.position.x > speedMilestoneCount) {
+		    speedMilestoneCount += speedIncreaseMilestone;
+		    speedIncreaseMilestone *= speedMultiplier;
+		    moveSpeed *= speedMultiplier;
 		}
 
 		rigidbody.velocity = new Vector2(moveSpeed, rigidbody.velocity.y);
@@ -93,6 +117,7 @@ public class PlayerController : MonoBehaviour {
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
 			jumpedFromGround = true;
 		} else if (Input.GetKey(KeyCode.Space) && canFly) {
+            flySound.Play();
 			rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
 		}
 
@@ -128,6 +153,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Die()
 	{
+        shieldSound.Stop();
 		gameManager.backgroundMusic.Stop();
 		deathSound.Play();
 		gameManager.RestartGame();
