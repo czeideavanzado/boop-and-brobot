@@ -95,7 +95,7 @@ MonoBehaviour:
   hasJetPack: 1
   hasMagnet: 0
   canFly: 0
-  powerupLength: 5
+  powerupLength: 10
 --- !u!212 &212101057738221248
 SpriteRenderer:
   m_ObjectHideFlags: 1
