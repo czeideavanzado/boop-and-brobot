@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: AOC_Brobot
+  m_Controller: {fileID: 9100000, guid: 724579a9002bb443a940427c2215a72e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5899a3e481aac485488bc25daa7a5ad3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7e19a84e171a3444fbe911684dba649a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5d3a2bfe00b774b30b0cf2db493faa9d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5b4bc1053c00a1548ba5805230260e1a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3d619e836d4e0415b84c6de0344d072a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 432e850a2b0217e48b29146a2f87e97f, type: 2}
