@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour {
 
 	public AudioSource backgroundMusic;
 
+	public PauseMenu pauseMenu;
+
 
 	// Use this for initialization
 	void Start () {
@@ -80,10 +82,11 @@ public class GameManager : MonoBehaviour {
 		scoreManager.scoreIncreasing = true;
 
 		playerCamera.SetActive(true);
+		playerController.isDead = false;
     playerController.gameObject.SetActive(true);
 
     powerupManager.DeactivatePowerups();
-
+		
 		backgroundMusic.Play();
 
 	}

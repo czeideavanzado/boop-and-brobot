@@ -6,9 +6,12 @@ public class DeathScreen : MonoBehaviour {
 
 	public string mainMenuLevel;
 	
+	
 	public void restartGame() {
 
-        FindObjectOfType<GameManager>().Reset();
+        
+				FindObjectOfType<GameManager>().backgroundMusic.Stop();
+				FindObjectOfType<GameManager>().Reset();
 	}
 
 	public void quitToMainMenu() {
