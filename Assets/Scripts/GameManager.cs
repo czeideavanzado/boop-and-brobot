@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour {
 
 		scoreManager = FindObjectOfType<ScoreManager>();
 
+		if (PlayerPrefs.HasKey ("VolumeBG"))
+			backgroundMusic.volume = PlayerPrefs.GetFloat ("VolumeBG");
 		backgroundMusic.Play();
 	}
 	

@@ -30,6 +30,8 @@ public class PickupCoin : MonoBehaviour {
 
 		//Get audio source called CoinSound in the Hierarchy
 		coinSound = GameObject.Find("CoinSound").GetComponent<AudioSource>(); 
+		if (PlayerPrefs.HasKey ("VolumeSFX"))
+			coinSound.volume = PlayerPrefs.GetFloat ("VolumeSFX");
 
 		rb = GetComponent<Rigidbody2D>();
 
