@@ -7,6 +7,8 @@ public class DeathScreen : MonoBehaviour {
 	public string mainMenuLevel;
 	public AudioSource deathScreenMusic;
 
+	public PlayerController playerController;
+
 	public void Start() {
 		if(PlayerPrefs.HasKey("VolumeBG"))
 			deathScreenMusic.volume = PlayerPrefs.GetFloat("VolumeBG");
@@ -16,7 +18,7 @@ public class DeathScreen : MonoBehaviour {
 
 	public void restartGame() {
 
-        
+				playerController.isDead = false;
 				FindObjectOfType<GameManager>().backgroundMusic.Stop();
 				FindObjectOfType<GameManager>().Reset();
 	}

@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void Reset() {
-
+		playerController.isDead = false;
 	    deathScreen.gameObject.SetActive(false);
 		
 		/*
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour {
 		scoreManager.scoreIncreasing = true;
 
 		playerCamera.SetActive(true);
-		playerController.isDead = false;
+		
     playerController.gameObject.SetActive(true);
 
     powerupManager.DeactivatePowerups();
