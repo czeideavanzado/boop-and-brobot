@@ -29,10 +29,16 @@ public class Powerups : MonoBehaviour {
 	/// </summary>
 	/// <param name="other">The other Collider2D involved in this collision.</param>
 	void OnTriggerEnter2D(Collider2D other) {
-			if(other.name == "Player") {
+			if(other.name == "Player" ) {
 				powerupManager.ActivatePowerup (hasShield, hasJetPack, hasMagnet, canFly, powerupLength);
+				gameObject.SetActive(false);
 			}
 
-			gameObject.SetActive(false);
+			else if(other.gameObject.name == "Magnet")
+			{
+				Physics2D.IgnoreCollision(other.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+			}
+
+			
 	}
 }
