@@ -7,6 +7,9 @@ public class MainMenu : MonoBehaviour {
 
 	public void Start()
 	{
+		if(PlayerPrefs.HasKey("VolumeBG"))
+			backgroundMusic.volume = PlayerPrefs.GetFloat("VolumeBG");
+		
 		backgroundMusic.Play();
 	}
 	public void QuitGame() {

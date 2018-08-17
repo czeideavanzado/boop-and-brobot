@@ -13,6 +13,12 @@ public class AudioController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		volumeLevel = 0.5f;
+		volumeSlider.normalizedValue = volumeLevel;
+		
+		if (PlayerPrefs.HasKey ("VolumeBG"))
+			volumeSlider.normalizedValue = PlayerPrefs.GetFloat ("VolumeBG");
+		if (PlayerPrefs.HasKey ("VolumeSFX"))
+			volumeSlider.normalizedValue = PlayerPrefs.GetFloat ("VolumeSFX");
 
 		audioSource = GetComponent<AudioSource> ();
 	}
@@ -24,6 +30,8 @@ public class AudioController : MonoBehaviour {
 
 		if (audioType == "bg") {
 			PlayerPrefs.SetFloat ("VolumeBG", volumeLevel);
+		} else if (audioType == "sfx") {
+			PlayerPrefs.SetFloat ("VolumeSFX", volumeLevel);
 		}
 	}
 }
