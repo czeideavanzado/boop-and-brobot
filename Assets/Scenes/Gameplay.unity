@@ -6438,6 +6438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuLevel: Main Menu
   deathScreenMusic: {fileID: 300941103}
+  playerController: {fileID: 1683783881}
 --- !u!1 &1755349970
 GameObject:
   m_ObjectHideFlags: 0

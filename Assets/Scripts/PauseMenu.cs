@@ -16,6 +16,7 @@ public class PauseMenu : MonoBehaviour {
 	void Update () {
 
 		if(playerController.isDead) canPause = false;
+		else canPause = true;
 
 		if(canPause)
 		{
@@ -50,5 +51,6 @@ public class PauseMenu : MonoBehaviour {
 	{
 		pauseMenuUI.SetActive(false);
 		Time.timeScale = 1f;
+		playerController.isDead = false;
 	}
 }
