@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour {
     public AudioSource deathSound;
     public AudioSource flySound;
     public AudioSource jetPackSound;
+    
+    public bool isDead = false;
 
     // Use this for initialization
     void Start() {
@@ -159,7 +161,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Die()
-	{
+	{   isDead = true;
         //shieldSound.Stop();
 		gameManager.backgroundMusic.Stop();
 		deathSound.Play();

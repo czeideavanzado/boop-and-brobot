@@ -88,6 +88,7 @@ public class PowerupManager : MonoBehaviour {
 			}
 
 			if(!hasJetPack && !hasMagnet && !hasShield && !canFly) isPowerupActive = false;
+			if(playerController.isDead) DeactivatePowerups();
 		}
 	}
 
