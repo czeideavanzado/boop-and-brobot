@@ -41,7 +41,8 @@ public class PowerupManager : MonoBehaviour {
 		magnet = playerController.transform.Find("Magnet").gameObject;
 		wings = playerController.transform.Find("Wings").gameObject;
 
-		
+		if (PlayerPrefs.HasKey ("VolumeSFX"))
+			powerUpSound.volume = PlayerPrefs.GetFloat ("VolumeSFX");
 	}
 	
 	// Update is called once per frame

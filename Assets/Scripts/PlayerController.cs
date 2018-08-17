@@ -63,7 +63,13 @@ public class PlayerController : MonoBehaviour {
             else
                 animator.runtimeAnimatorController = Resources.Load<AnimatorOverrideController>("AOC_Brobot");
         }
-
+		if(PlayerPrefs.HasKey("VolumeSFX"))
+		{
+			jumpSound.volume = PlayerPrefs.GetFloat("VolumeSFX");
+			deathSound.volume = PlayerPrefs.GetFloat("VolumeSFX");
+			flySound.volume = PlayerPrefs.GetFloat("VolumeSFX");
+			jetPackSound.volume = PlayerPrefs.GetFloat("VolumeSFX");
+		}
 
         deathSound = GameObject.Find("DeathSound").GetComponent<AudioSource>();
         jumpSound = GameObject.Find("JumpSound").GetComponent<AudioSource>();
